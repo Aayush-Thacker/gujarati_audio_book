@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block nav %}
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('index') }}">હોમ પેજ<span class="sr-only">(current)</span></a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="{{ url_for('user') }}">લખો અને ધ્વનિ સ્વરૂપ મેળવો</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('ito') }}">તસવીરના લખાણને ધ્વનિ સ્વરૂપમાં ફેરવો </a>
+</li>
+{% endblock %}
+
+{% block books %}
+<div class="col-sm-12" style="text-align: center;">
+    <h3>અહીં લખો અને ઘ્વાની સ્વરૂપે મેળવો </h3>
+</div>
+<div class="col-sm-12 text-center">
+    <form class="form-inline" action="{{ url_for('user') }}" method="POST">
+        {% if datai != None %}
+        <textarea class="form-control" rows="5" cols="200" id="tarea" name="text" min="1">{{ datai }}</textarea>
+        {% else %}
+        <textarea class="form-control" rows="5" cols="200" id="tarea" name="text" min="1"></textarea>
+        {% endif %}
+        <br><br><br>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">રૂપાંતર કરો </button>
+    </form>
+</div>
+
+{% if data!=None %}
+<div class="col-sm-6" style="text-align: center;">
+    <h3>{{ data }} તૈયાર છે.</h3>
+</div>
+<div class="col-sm-3" style="text-align: center;">
+    <audio controls src="static/temp/{{data}}"></audio>
+</div>
+<div class="col-sm-3" style="text-align: center;">
+    <a href="static/temp/{{data}}" download><img src="static/icons/download.png" height="50px" width="50px"></a>
+</div>
+<br><br><br>
+{% endif %}
+{% endblock %}

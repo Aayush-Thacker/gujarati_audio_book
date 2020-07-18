@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block nav %}
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('index') }}">હોમ પેજ<span class="sr-only">(current)</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('user') }}">લખો અને ધ્વનિ સ્વરૂપ મેળવો</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="{{ url_for('ito') }}">તસવીરના લખાણને ધ્વનિ સ્વરૂપમાં ફેરવો </a>
+</li>
+{% endblock %}
+
+{% block books %}
+<div class="col-sm-12" style="text-align: center;">
+    <h3>અહીં તસવીરના લખાણને ધ્વનિ સ્વરૂપમાં ફેરવો </h3>
+</div>
+<div class="col-sm-12">
+    <form class="form-inline" action="{{ url_for('ito') }}" method="POST" enctype="multipart/form-data">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile" name="image" accept="image/*">
+            <label class="custom-file-label" for="customFile">તસવીર પસંદ કરો</label>
+        </div>
+        <br><br><br>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">રૂપાંતર કરો</button>
+    </form>
+    <script>
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+</div>
+{% endblock %}

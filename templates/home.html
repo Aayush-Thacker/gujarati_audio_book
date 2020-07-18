@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+
+{% block nav %}
+<li class="nav-item active">
+    <a class="nav-link" href="{{ url_for('index') }}">હોમ પેજ<span class="sr-only">(current)</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('user') }}">લખો અને ધ્વનિ સ્વરૂપ મેળવો</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('ito') }}">તસવીરના લખાણને ધ્વનિ સ્વરૂપમાં ફેરવો </a>
+</li>
+{% endblock %}
+
+{% block books %}
+{% if data==None %}
+<div class="col-sm-6" style="text-align: center;"></div>
+    <br><br>
+    <h3>કોઈ પુસ્તકો મળ્યાં નથી!</h3>
+    <br><br>
+    <ul type="circle">
+      <li>ખાતરી કરો કે તમે ગુજરાતી ફોન્ટ્સમાં શોધી રહ્યા છો.</li>
+      <li>તમારી વ્યાકરણની ભૂલો તપાસો અને ફરીથી પ્રયાસ કરો.</li>
+    </ul>
+</div>
+{% else %}
+{% for books in data['books'] %}
+    <div class="col-sm-6" style="text-align: center;">
+        <img src="./static/images/{{ books['image'] }}" width="200px" height="300px">
+        <br><br>
+        <h2>{{ books['name'] }}</h2>
+        <h4>{{ books['author'] }}</h4>
+        {% if books['details']|length > 250 %}
+        <small style="text-align: justify;">{{ books['details'][0:250] }}...</small>
+        {% else %}
+        <small style="text-align: justify;">{{ books['details'] }}</small>
+        {% endif %}
+        <br><br>
+        <a href="{{ url_for('book1', name = books['name']) }}"><button class="btn"><i class="fa fa-download"></i>વધુ જાણો</button></a>
+        <br><br><br>
+    </div>
+{% endfor %}
+{% endif %}
+{% endblock %}

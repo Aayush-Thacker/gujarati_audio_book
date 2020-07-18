@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload a book</title>
+    </head>
+    <body bgcolor="lightblue">
+        <table align="center" cellspacing="5" cellpadding="4">
+            <tr>
+                <td colspan="2">
+                    <h1>Someone found a secret location!</h1>
+                </td>
+            </tr>
+            <form action="{{ url_for('secret') }}" method="POST" enctype="multipart/form-data">
+                <tr>
+                    <td>Book Name:-</td>
+                    <td><input type="text" min="1" name="name" required></td>
+                </tr>
+                <tr>
+                    <td>Author Name:-</td>
+                    <td><input type="text" min="1" name="author" required></td>
+                </tr>
+                <tr>
+                    <td>Details:-</td>
+                    <td><textarea name="details" required></textarea></td>
+                </tr>
+                <tr>
+                    <td>Image:-</td>
+                    <td><input type="file" name="image" required></td>
+                </tr>
+                <tr>
+                    <td>Audio File:-</td>
+                    <td><input type="file" name="audio[]" multiple required></td>
+                </tr>
+                <tr>
+                    <td>PDF:-</td>
+                    <td><input type="file" name="pdf" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;"><input type="submit" name="submit" value="submit"></td>
+                </tr>
+            </form>
+        </table>
+        {% if message=="Y" %}
+            <div style="background-color: lightgreen;">
+                <u>Data uploaded sucessfully!</u>
+            </div>
+        {% endif %}
+    </body>
+</html>
