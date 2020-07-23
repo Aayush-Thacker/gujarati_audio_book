@@ -24,7 +24,7 @@
     </ul>
 </div>
 {% else %}
-{% for books in data['books'] %}
+{% for books in data %}
     <div class="col-sm-6" style="text-align: center;">
         <img src="./static/images/{{ books['image'] }}" width="200px" height="300px">
         <br><br>
@@ -40,5 +40,27 @@
         <br><br><br>
     </div>
 {% endfor %}
+{% endif %}
+{% if search!=True %}
+<table border=0 width="100%">
+<tr>
+<td style="text-align: left;">
+{% if l==True %}
+<a href="{{ url_for('page', p = 1) }}"><button class="btn">&#8249; Previous</button></a>
+{% else %}
+{% if page!=1 %}
+<a href="{{ url_for('page', p = page-1) }}"><button class="btn">&#8249; Previous</button></a>
+{% endif %}
+{% endif %}
+</td>
+<td style="text-align: right;">
+{% if l!=True %}
+{% if page>=1 %}
+<a href="{{ url_for('page', p = page+1) }}"><button class="btn">Next &#8250;</button></a>
+{% endif %}
+{% endif %}
+</td>
+</tr>
+</table>
 {% endif %}
 {% endblock %}
